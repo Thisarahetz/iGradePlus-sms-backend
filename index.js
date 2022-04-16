@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const auth = require('./routes/auth'); //Register and login authontication
 const usersRouter = require('./routes/users'); // update and delete and getAll and find
 const staffRouter = require('./routes/staff');
+const TeacherRouter = require('./routes/teachers');
 
 const cors = require('cors');
 //Enable CORE
@@ -37,3 +38,4 @@ app.use("/api/auth",auth);
 app.use("/api/users",usersRouter);
 
 app.use("/api/staff",staffRouter); //Staff routes
+app.use("/api/Teachers",TeacherRouter); //Teachers routes
