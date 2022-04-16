@@ -64,4 +64,17 @@ router.get("/find/:id", async(req,res)=>{
 
 });
 
+/*
+*@Find All Staff
+*/
+router.get("/", async(req,res)=>{
+    try{
+        const getStaff =await Staff.find();
+        res.status(201).json(getStaff);
+    }catch(err){
+        res.status(500).json(err);
+    }
+
+});
+
 module.exports = router
