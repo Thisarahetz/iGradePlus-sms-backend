@@ -49,4 +49,19 @@ router.delete("/:id", async(req,res)=>{
 
 });
 
+/*
+*@Find Staff
+*/
+router.get("/find/:id", async(req,res)=>{
+    try{
+        const getStaff =await Staff.findById(
+            req.params.id
+        );
+        res.status(201).json(getStaff);
+    }catch(err){
+        res.status(500).json(err);
+    }
+
+});
+
 module.exports = router
