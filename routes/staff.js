@@ -35,5 +35,18 @@ router.put("/:id", async(req,res)=>{
 
 });
 
+/*
+*@DELETE
+*/
+router.delete("/:id", async(req,res)=>{
+    try{
+        await Staff.findByIdAndDelete(req.params.id);
+         res.status(201).json("Delete Staff!!");
+        // res.status(201).json("Staff is not found");
+    }catch(err){
+        res.status(500).json(err);
+    }
+
+});
 
 module.exports = router
