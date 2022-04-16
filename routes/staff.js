@@ -16,5 +16,24 @@ router.post("/", async(req,res)=>{
     
 });
 
+/*
+*@UPDATE
+*/
+router.put("/:id", async(req,res)=>{
+    try{
+        const updateStaff = await Staff.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set:req.body,
+            },
+        { new:true }
+        );
+        res.status(201).json(updateStaff);
+    }catch(err){
+        res.status(500).json(err);
+    }
+
+});
+
 
 module.exports = router
