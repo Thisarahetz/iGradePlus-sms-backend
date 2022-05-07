@@ -1,84 +1,94 @@
 const router = require('express').Router();
-const Teacher = require('../models/Teacher');
+const Event = require('../models/Event');
 const verify = require('../verifyToken');
 
 /*
 *@CREATE 
 */
-router.post("/", async(req,res)=>{
+router.post("/",async(req,res)=>{
     
-        const newTeacher =new Teacher(req.body);
+        const newEvents =new Event(req.body);
             try{
-                const saveUser = await newTeacher.save();
+                const saveUser = await newEvents.save();
                 res.status(200).json(saveUser);
             }catch(err){
                 res.status(500).json(err);
             }
+    
 });
 /*
 *@UPDATE
 */
 router.put("/:id", async(req,res)=>{
             try{
-                const updateTeacher = await Teacher.findByIdAndUpdate(
-                    req.params.id,
-                    {
-                        $set:req.body,
-                    },
-                { new:true }
-                );
-                res.status(201).json(updateTeacher);
+                 const updateEvents = await Event.findByIdAndUpdate(
+                     req.params.id,
+                     {
+                         $set:req.body,
+                     },
+                     { new:true }
+                 );
+                res.status(201).json(updateEvents);
             }catch(err){
                 res.status(500).json(err);
             }
+
 });
 
 /*
 *@DELETE
 */
-router.delete("/:id", async(req,res)=>{
+router.delete("/:id",async(req,res)=>{
+    
             try{
-                await Teacher.findByIdAndDelete(req.params.id);
-                res.status(200).json("The Teacher has been deleted...");
+                  await Event.findByIdAndDelete(req.params.id);
+                 
+                    //res.status(201).json("Delete Events!!");
+                 
+                 //res.status(201).json("Event is not found");
             }catch(err){
                 res.status(500).json(err);
             }
+   
+
 });
 
 /*
-*@Find Teacher
+*@Find Events
 */
 router.get("/find/:id", async(req,res)=>{
             try{
-                const getTeacher =await Teacher.findById(
-                    req.params.id
-                );
-                res.status(201).json(getTeacher);
+                 const getEvents =await Event.findById(
+                     req.params.id
+                 );
+                res.status(201).json(getEvents);
             }catch(err){
                 res.status(500).json(err);
             }
 
 });
 
+
+
 /*
-*@Find Teacher
+*@Find All Events
 */
-router.get("/",  async(req,res)=>{
+router.get("/", async(req,res)=>{
     try{
-        const getTeacher =await Teacher.find();
-        res.status(201).json(getTeacher);
+         const getEvents =await Event.find();
+        res.status(201).json(getEvents);
     }catch(err){
         res.status(500).json(err);
     }
 
 });
 
-//GET Teacher add month 
+//GET Event add month 
 router.get("/month", async (req, res) => {
     const today = new Date();
     today.setFullYear(today.setFullYear() - 1);
     try {
-    const data = await Teacher.aggregate([
+    const data = await Event.aggregate([
         {
         $project: {
               //$month
