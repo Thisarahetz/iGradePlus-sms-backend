@@ -48,7 +48,7 @@ router.delete("/:id", async(req,res)=>{
 /*
 *@Find Teacher
 */
-router.get("find/:id", async(req,res)=>{
+router.get("/find/:id", async(req,res)=>{
             try{
                 const getTeacher =await Teacher.findById(
                     req.params.id
@@ -71,6 +71,31 @@ router.get("/",  async(req,res)=>{
         res.status(500).json(err);
     }
 
+});
+
+//GET Teacher add month 
+router.get("/month", async (req, res) => {
+    const today = new Date();
+    today.setFullYear(today.setFullYear() - 1);
+    try {
+    const data = await Teacher.aggregate([
+        {
+        $project: {
+              //$month
+            month: { $month: "$createdAt" },
+        },
+        },
+        {
+        $group: {
+            _id: "$month",
+            total: { $sum: 1 },
+        },
+        },
+    ]);
+    res.status(200).json(data)
+    } catch (err) {
+    res.status(500).json(err);
+    }
 });
 
 module.exports = router

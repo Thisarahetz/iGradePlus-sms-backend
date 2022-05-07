@@ -11,12 +11,13 @@ const teacherSchema = new mongoose.Schema(
     fixnumber: { type: Number, },
     teachsubject: { type: String, },
     firstnameEMG: { type: String, },
-    lastnameEMG: { type: String, },
+    addressline2EMG: { type: String  },
     cityEMG: { type: String, },
     genderEMG: { type: String, },
-    Emobilenumber: { type: Number, }, 
-    Efixnumber: { type: Number, },
+    mobilenumberEMG: { type: Number, }, 
+    fixnumberEMG: { type: Number, },
     isAdmin: { type: Boolean, default: false },
   },
+  { timestamps: true }
   );
 module.exports = mongoose.model("Teacher", teacherSchema);
