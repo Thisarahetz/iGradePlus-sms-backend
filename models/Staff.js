@@ -21,6 +21,7 @@ const staffSchema = new mongoose.Schema(
     add4: { type: String },
     city2: { type: String },
     Mnumber2: { type: String },
-  }
+  },
+  {timestamps: true}
   );
 module.exports = mongoose.model("Staff", staffSchema);
