@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const auth = require('./routes/auth'); //Register and login authontication
 const usersRouter = require('./routes/users'); // update and delete and getAll and find
+const eventsRouter = require('./routes/events'); // Events routes
+const staffRouter = require('./routes/staff');
+const TeacherRouter = require('./routes/teachers');
 
 const studentRouter = require('./routes/student') //student model
 
@@ -28,7 +31,7 @@ mongoose.connect(process.env.MONGO_URL,{
 })
 .then(()=>console.log("DB Connection Successfull!!!!"))
 .catch((err)=>console.log(err));
-/*Accesp JSON*/
+/Accesp JSON/
 app.use(express.json());
 
 /*
@@ -36,4 +39,8 @@ Routers
 */
 app.use("/api/auth",auth);
 app.use("/api/users",usersRouter);
-app.use("/api/student",studentRouter);
+
+app.use("/api/student",studentRouter); //student Roter
+app.use("/api/events",eventsRouter); //EventRouter
+app.use("/api/staff",staffRouter); //Staff routes
+app.use("/api/Teachers",TeacherRouter); //Teachers routes
