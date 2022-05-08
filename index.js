@@ -8,6 +8,8 @@ const eventsRouter = require('./routes/events'); // Events routes
 const staffRouter = require('./routes/staff');
 const TeacherRouter = require('./routes/teachers');
 
+const studentRouter = require('./routes/student') //student model
+
 const cors = require('cors');
 //Enable CORE
 app.use(cors());
@@ -38,6 +40,7 @@ Routers
 app.use("/api/auth",auth);
 app.use("/api/users",usersRouter);
 
+app.use("/api/student",studentRouter); //student Roter
 app.use("/api/events",eventsRouter); //EventRouter
 app.use("/api/staff",staffRouter); //Staff routes
 app.use("/api/Teachers",TeacherRouter); //Teachers routes
