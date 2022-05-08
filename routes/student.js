@@ -78,4 +78,30 @@ router.get("/",
 
 });
 
+//GET Student add month 
+router.get("/month", async (req, res) => {
+    const today = new Date();
+    today.setFullYear(today.setFullYear() - 1);
+    try {
+    const data = await Student.aggregate([
+        {
+        $project: {
+              //$month
+            month: { $month: "$createdAt" },
+        },
+        },
+        {
+        $group: {
+            _id: "$month",
+            total: { $sum: 1 },
+        },
+        },
+    ]);
+    res.status(200).json(data)
+    } catch (err) {
+    res.status(500).json(err);
+    }
+});
+
+
 module.exports = router

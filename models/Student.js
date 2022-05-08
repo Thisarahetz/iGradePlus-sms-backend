@@ -18,6 +18,7 @@ const studentSchema = new mongoose.Schema(
   gAddressL2: { type: String },
   gCity: { type: String },
   gMnumber: { type: String }
-  }
+  },
+  {timestamps : true}
   );
 module.exports = mongoose.model("Student", studentSchema);
